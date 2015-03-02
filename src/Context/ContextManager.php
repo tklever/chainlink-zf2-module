@@ -46,7 +46,7 @@ class ContextManager
             return $this->contexts[$contextName];
         }
 
-        if($factory === false) {
+        if ($factory === false) {
             return null;
         }
 

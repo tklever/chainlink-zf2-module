@@ -40,7 +40,7 @@ class ContextManager implements FactoryInterface
 
         $this->setManagerOptions($config, $manager);
 
-        if(isset($config['contexts']) && is_array($config['contexts'])) {
+        if (isset($config['contexts']) && is_array($config['contexts'])) {
             $this->injectContexts($manager, $config['contexts'], $serviceLocator);
         }
 
@@ -60,9 +60,9 @@ class ContextManager implements FactoryInterface
 
     protected function injectContexts(Manager $manager, $config, ServiceLocatorInterface $serviceLocator)
     {
-        foreach($config as $contextName => $contextConfig) {
-
-            $contextClass = isset($contextConfig['context_class']) ? $contextConfig['context_class'] : $manager->getContextClass();
+        foreach ($config as $contextName => $contextConfig) {
+            $contextClass = isset($contextConfig['context_class'])
+                ? $contextConfig['context_class'] : $manager->getContextClass();
 
             if (!class_exists($contextClass)) {
                 throw new ServiceNotCreatedException(sprintf(
@@ -90,8 +90,7 @@ class ContextManager implements FactoryInterface
 
     protected function injectHandlers(Context $context, $config, ServiceLocatorInterface $serviceLocator)
     {
-        foreach($config as $handlerName) {
-
+        foreach ($config as $handlerName) {
             if ($serviceLocator->has($handlerName)) {
                 $handler = $serviceLocator->get($handlerName);
             } else {
